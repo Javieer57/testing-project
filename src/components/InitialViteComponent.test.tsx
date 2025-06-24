@@ -1,4 +1,3 @@
-import { describe, expect, it } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import InitialViteComponent from "./InitialViteComponent";
