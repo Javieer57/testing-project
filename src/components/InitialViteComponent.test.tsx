@@ -1,28 +1,28 @@
 import { describe, expect, it } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
-import App from "./App";
+import InitialViteComponent from "./InitialViteComponent";
 
-describe("App", () => {
+describe("InitialViteComponent", () => {
   it("should display the Vite and React logos", () => {
-    render(<App />);
+    render(<InitialViteComponent />);
     expect(screen.getByAltText("Vite logo")).toBeInTheDocument();
     expect(screen.getByAltText("React logo")).toBeInTheDocument();
   });
 
   it("should display the main title", () => {
-    render(<App />);
+    render(<InitialViteComponent />);
     expect(screen.getByText(/Vite \+ React/i)).toBeInTheDocument();
   });
 
   it("should display the button with the initial counter", () => {
-    render(<App />);
+    render(<InitialViteComponent />);
     expect(screen.getByRole("button")).toHaveTextContent("count is 0");
   });
 
   it("should increment the counter when the button is clicked", async () => {
     const user = userEvent.setup();
-    render(<App />);
+    render(<InitialViteComponent />);
     const button = screen.getByRole("button");
     await user.click(button);
     expect(button).toHaveTextContent("count is 1");
