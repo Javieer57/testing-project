@@ -1,9 +1,5 @@
-type Extension = {
-  logo: string;
-  name: string;
-  description: string;
-  isActive: boolean;
-};
+import type { Extension } from "../types/extension";
+import { ExtensionCard } from "./ExtensionCard";
 
 export type Props = {
   extensions: Extension[];
@@ -16,10 +12,7 @@ export const BrowserExtensions = ({ extensions }: Props) => {
 
       <ul>
         {extensions.map((ext) => (
-          <li key={ext.name}>
-            <img src={ext.logo} alt={`${ext.name} logo`} />
-            {ext.name}
-          </li>
+          <ExtensionCard key={ext.name} extension={ext} />
         ))}
       </ul>
     </>
