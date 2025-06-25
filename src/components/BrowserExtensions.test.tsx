@@ -1,33 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
 import data from "../mock/data.json";
-
-type Extension = {
-  logo: string;
-  name: string;
-  description: string;
-  isActive: boolean;
-};
-
-type Props = {
-  extensions: Extension[];
-};
-
-const BrowserExtensions = ({ extensions }: Props) => {
-  return (
-    <>
-      <h1>Extensions List</h1>
-
-      <ul>
-        {extensions.map((ext) => (
-          <li key={ext.name}>
-            <img src={ext.logo} alt={`${ext.name} logo`} />
-            {ext.name}
-          </li>
-        ))}
-      </ul>
-    </>
-  );
-};
+import { BrowserExtensions } from "./BrowserExtensions";
 
 describe("BrowserExtensions", () => {
   it("should render correct title", () => {
