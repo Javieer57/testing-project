@@ -1,15 +1,9 @@
 import { useState } from "react";
-import type { Extension } from "../types/extension";
 import { ExtensionCard } from "./ExtensionCard";
 import data from "../mock/data.json";
 
-export type Props = {
-  extensions: Extension[];
-};
-
 export const BrowserExtensions = () => {
-  const [extensions, setExtensions] = useState([...data]);
-  const [filteredExtensions, setFilteredExtensions] = useState(extensions);
+  const [filteredExtensions, setFilteredExtensions] = useState([...data]);
 
   return (
     <>
@@ -17,17 +11,17 @@ export const BrowserExtensions = () => {
         <h1>Extensions List</h1>
 
         <div>
-          <button onClick={() => setFilteredExtensions(extensions)}>All</button>
+          <button onClick={() => setFilteredExtensions([...data])}>All</button>
           <button
             onClick={() =>
-              setFilteredExtensions(extensions.filter((ext) => ext.isActive))
+              setFilteredExtensions(data.filter((ext) => ext.isActive))
             }
           >
             Active
           </button>
           <button
             onClick={() =>
-              setFilteredExtensions(extensions.filter((ext) => !ext.isActive))
+              setFilteredExtensions(data.filter((ext) => !ext.isActive))
             }
           >
             Inactive
