@@ -2,22 +2,32 @@ import type { Extension } from "../types/extension";
 
 export const ExtensionCard = ({ extension }: { extension: Extension }) => {
   return (
-    <li>
-      <div>
+    <li className="border border-neutral-300 rounded-2xl p-5 space-y-6 shadow-md bg-neutral-0">
+      <div className="flex gap-4 items-start">
         <img src={extension.logo} alt={`${extension.name} logo`} />
 
-        <div>
-          <h2>{extension.name}</h2>
+        <div className="space-y-1.5">
+          <h2 className="text-xl font-bold">{extension.name}</h2>
 
-          <p>{extension.description}</p>
+          <p className="tracking-[-3%] line-clamp-3 min-h-[calc(var(--leading-normal)_*_3rem)] max-h-[calc(var(--leading-normal)_*_3rem)]">
+            {extension.description}
+          </p>
         </div>
       </div>
 
-      <div>
-        <button>Remove</button>
+      <div className="flex items-center gap-2 justify-between">
+        <button className="transition-colors font-medium py-2 px-4 tracking-[-3%] border rounded-full leading-tight border-neutral-300 hover:border-red-700 hover:text-white hover:bg-red-700 focus:border-red-700 focus:text-white focus:bg-red-700">
+          Remove
+        </button>
 
-        <button type="button" role="switch" aria-checked={extension.isActive}>
+        <button
+          type="button"
+          className="flex rounded-full p-0.5 h-5 w-9 group bg-neutral-300 aria-checked:bg-red-700"
+          role="switch"
+          aria-checked={extension.isActive}
+        >
           <span className="sr-only">Active extension</span>
+          <span className="relative inline-block left-0 rounded-full w-4 h-4 leading-0 bg-white group-aria-checked:ml-auto transition-all"></span>
         </button>
       </div>
     </li>

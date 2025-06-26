@@ -29,7 +29,7 @@ export const BrowserExtensions = () => {
         </div>
       </div>
 
-      <ul>
+      <ul className="grid grid-cols-3 gap-3.5">
         {filteredExtensions.map((ext) => (
           <ExtensionCard key={ext.name} extension={ext} />
         ))}
