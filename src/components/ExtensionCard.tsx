@@ -28,13 +28,13 @@ export const ExtensionCard = ({
 
         <button
           type="button"
-          className="flex rounded-full p-0.5 h-5 w-9 group bg-neutral-300 aria-checked:bg-red-700"
+          className="flex rounded-full p-0.5 h-5 w-9 group bg-neutral-300 aria-checked:bg-red-700 transition-all"
           role="switch"
           aria-checked={extension.isActive}
           onClick={() => onToggle(extension.name)}
         >
           <span className="sr-only">Active extension</span>
-          <span className="relative inline-block left-0 rounded-full w-4 h-4 leading-0 bg-white group-aria-checked:ml-auto transition-all"></span>
+          <span className="relative inline-block left-0 rounded-full w-4 h-4 leading-0 bg-white group-aria-checked:left-4 transition-all"></span>
         </button>
       </div>
     </li>
