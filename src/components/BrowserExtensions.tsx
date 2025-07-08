@@ -15,7 +15,7 @@ export const BrowserExtensions = () => {
 
   return (
     <main className="mx-auto grid max-w-[75.625rem] gap-9 px-5">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col items-center justify-between gap-5 md:flex-row">
         <h1 className="text-[2rem] font-bold">Extensions List</h1>
 
         <div className="flex gap-2.5">
@@ -40,7 +40,7 @@ export const BrowserExtensions = () => {
         </div>
       </div>
 
-      <ul className="grid grid-cols-3 gap-3.5">
+      <ul className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
         {extensions
           .filter(
             (ext) =>
