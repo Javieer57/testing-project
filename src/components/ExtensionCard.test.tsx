@@ -1,6 +1,6 @@
 import { ExtensionCard } from "./ExtensionCard";
 import data from "../mock/data.json";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 
@@ -51,7 +51,7 @@ describe("ExtensionCard", () => {
     // 'getAttribute' could not be rendered with 'undefined' or 'null'
     expect(switchButton).toHaveAttribute(
       "aria-checked",
-      extension.isActive ? "true" : "false"
+      extension.isActive ? "true" : "false",
     );
   });
 
@@ -61,6 +61,10 @@ describe("ExtensionCard", () => {
 
     await user.click(switchButton);
 
-    expect(mockToggle).toHaveBeenCalledWith(extension.name);
+    // waitFor waits for the expectation to pass
+    // https://testing-library.com/docs/dom-testing-library/api-async/#waitfor
+    await waitFor(() => {
+      expect(mockToggle).toHaveBeenCalledWith(extension.name);
+    });
   });
 });

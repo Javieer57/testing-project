@@ -1,4 +1,5 @@
 import type { Extension } from "../types/extension";
+import { useRef, useState } from "react";
 
 export const ExtensionCard = ({
   extension,
@@ -7,34 +8,57 @@ export const ExtensionCard = ({
   extension: Extension;
   onToggle: (name: string) => void;
 }) => {
+  const [isSwitching, setIsSwitching] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleClick = (name: string) => {
+    if (isSwitching && timeoutRef.current) {
+      // User cancels before changes apply
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+      setIsSwitching(false);
+      return;
+    }
+
+    // User starts changes
+    setIsSwitching(true);
+    timeoutRef.current = setTimeout(() => {
+      onToggle(name);
+      timeoutRef.current = null;
+      setIsSwitching(false);
+    }, 500);
+  };
+
+  const visualActive = isSwitching ? !extension.isActive : extension.isActive;
+
   return (
-    <li className="border border-neutral-300 rounded-2xl p-5 space-y-6 shadow-md bg-neutral-0">
-      <div className="flex gap-4 items-start">
+    <li className="bg-neutral-0 space-y-6 rounded-2xl border border-neutral-300 p-5 shadow-md">
+      <div className="flex items-start gap-4">
         <img src={extension.logo} alt={`${extension.name} logo`} />
 
         <div className="space-y-1.5">
           <h2 className="text-xl font-bold">{extension.name}</h2>
 
-          <p className="tracking-[-3%] line-clamp-3 min-h-[calc(var(--leading-normal)_*_3rem)] max-h-[calc(var(--leading-normal)_*_3rem)]">
+          <p className="line-clamp-3 max-h-[calc(var(--leading-normal)_*_3rem)] min-h-[calc(var(--leading-normal)_*_3rem)] tracking-[-3%]">
             {extension.description}
           </p>
         </div>
       </div>
 
-      <div className="flex items-center gap-2 justify-between">
-        <button className="transition-colors font-medium py-2 px-4 tracking-[-3%] border rounded-full leading-tight border-neutral-300 hover:border-red-700 hover:text-white hover:bg-red-700 focus:border-red-700 focus:text-white focus:bg-red-700">
+      <div className="flex items-center justify-between gap-2">
+        <button className="rounded-full border border-neutral-300 px-4 py-2 leading-tight font-medium tracking-[-3%] transition-colors hover:border-red-700 hover:bg-red-700 hover:text-white focus:border-red-700 focus:bg-red-700 focus:text-white">
           Remove
         </button>
 
         <button
           type="button"
-          className="flex rounded-full p-0.5 h-5 w-9 group bg-neutral-300 aria-checked:bg-red-700 transition-all"
+          className="group flex h-5 w-9 rounded-full bg-neutral-300 p-0.5 transition-all aria-checked:bg-red-700"
           role="switch"
-          aria-checked={extension.isActive}
-          onClick={() => onToggle(extension.name)}
+          aria-checked={visualActive}
+          onClick={() => handleClick(extension.name)}
         >
           <span className="sr-only">Active extension</span>
-          <span className="relative inline-block left-0 rounded-full w-4 h-4 leading-0 bg-white group-aria-checked:left-4 transition-all"></span>
+          <span className="relative left-0 inline-block h-4 w-4 rounded-full bg-white leading-0 transition-all group-aria-checked:left-4"></span>
         </button>
       </div>
     </li>
