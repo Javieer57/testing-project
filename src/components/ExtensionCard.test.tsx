@@ -7,9 +7,16 @@ import { vi } from "vitest";
 describe("ExtensionCard", () => {
   const extension = data[0];
   const mockToggle = vi.fn();
+  const mockRemove = vi.fn();
 
   beforeEach(() => {
-    render(<ExtensionCard extension={extension} onToggle={mockToggle} />);
+    render(
+      <ExtensionCard
+        extension={extension}
+        onToggle={mockToggle}
+        onRemove={mockRemove}
+      />,
+    );
   });
 
   it("should shows extension's logo", () => {
@@ -38,7 +45,11 @@ describe("ExtensionCard", () => {
   });
 
   it("should shows 'remove' button", () => {
-    expect(screen.getByRole("button", { name: "Remove" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", {
+        name: `Remove ${extension.name} extension`,
+      }),
+    ).toBeInTheDocument();
   });
 
   it("should shows active/inactive switch button", () => {
@@ -65,6 +76,19 @@ describe("ExtensionCard", () => {
     // https://testing-library.com/docs/dom-testing-library/api-async/#waitfor
     await waitFor(() => {
       expect(mockToggle).toHaveBeenCalledWith(extension.name);
+    });
+  });
+
+  it("calls onRemove when button is clicked", async () => {
+    const user = userEvent.setup();
+    const removeButton = screen.getByRole("button");
+
+    await user.click(removeButton);
+
+    // waitFor waits for the expectation to pass
+    // https://testing-library.com/docs/dom-testing-library/api-async/#waitfor
+    await waitFor(() => {
+      expect(mockRemove).toHaveBeenCalledWith(extension.name);
     });
   });
 });

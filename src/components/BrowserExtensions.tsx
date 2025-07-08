@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ExtensionCard } from "./ExtensionCard";
 import data from "../mock/data.json";
 import { toggleExtension } from "../utils/toggleExtension";
+import { removeExtension } from "../utils/removeExtension";
 
 export const BrowserExtensions = () => {
   const [extensions, setExtensions] = useState([...data]);
@@ -11,6 +12,10 @@ export const BrowserExtensions = () => {
 
   const handleToggle = (name: string) => {
     setExtensions((prev) => toggleExtension(prev, name));
+  };
+
+  const handleRemove = (name: string) => {
+    setExtensions((prev) => removeExtension(prev, name));
   };
 
   return (
@@ -52,6 +57,7 @@ export const BrowserExtensions = () => {
               key={ext.name}
               extension={ext}
               onToggle={handleToggle}
+              onRemove={handleRemove}
             />
           ))}
       </ul>

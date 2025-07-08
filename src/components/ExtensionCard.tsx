@@ -1,13 +1,13 @@
 import type { Extension } from "../types/extension";
 import { useRef, useState } from "react";
 
-export const ExtensionCard = ({
-  extension,
-  onToggle,
-}: {
+interface Props {
   extension: Extension;
   onToggle: (name: string) => void;
-}) => {
+  onRemove: (name: string) => void;
+}
+
+export const ExtensionCard = ({ extension, onToggle, onRemove }: Props) => {
   const [isSwitching, setIsSwitching] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -46,8 +46,11 @@ export const ExtensionCard = ({
       </div>
 
       <div className="flex items-center justify-between gap-2">
-        <button className="rounded-full border border-neutral-300 px-4 py-2 leading-tight font-medium tracking-[-3%] transition-colors hover:border-red-700 hover:bg-red-700 hover:text-white focus:border-red-700 focus:bg-red-700 focus:text-white">
-          Remove
+        <button
+          className="pill-button"
+          onClick={() => onRemove(extension.name)}
+        >
+          Remove <span className="sr-only">{extension.name} extension</span>
         </button>
 
         <button
