@@ -19,7 +19,7 @@ export const BrowserExtensions = () => {
   };
 
   return (
-    <main className="mx-auto grid max-w-[75.625rem] gap-9 px-5">
+    <section className="mx-auto grid max-w-[75.625rem] gap-9 px-5">
       <div className="flex flex-col items-center justify-between gap-5 md:flex-row">
         <h1 className="text-[2rem] font-bold">Extensions List</h1>
 
@@ -61,6 +61,6 @@ export const BrowserExtensions = () => {
             />
           ))}
       </ul>
-    </main>
+    </section>
   );
 };
