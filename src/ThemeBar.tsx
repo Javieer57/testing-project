@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Logo } from "./components/Logo";
 
 export const ThemeBar = () => {
   const [theme, setTheme] = useState<"dark" | "">("");
@@ -25,11 +26,11 @@ export const ThemeBar = () => {
 
   return (
     <section className="mx-auto max-w-[75.625rem] px-5">
-      <div className="bg-neutral-0 flex items-center justify-between rounded-2xl border border-neutral-300 px-3.5 py-4 shadow-md">
-        <img src="/images/logo.svg" alt="" />
+      <div className="bg-neutral-0 dark:text-neutral-0 flex items-center justify-between rounded-2xl border border-neutral-300 px-3.5 py-4 shadow-md dark:border-neutral-700 dark:bg-neutral-800">
+        <Logo />
 
         <button
-          className="flex h-[3.125rem] w-[3.125rem] items-center justify-center rounded-xl bg-neutral-100 transition-colors dark:bg-neutral-700"
+          className="flex h-[3.125rem] w-[3.125rem] items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-700"
           onClick={handleClick}
         >
           <img

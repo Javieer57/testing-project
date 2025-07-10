@@ -32,7 +32,7 @@ export const ExtensionCard = ({ extension, onToggle, onRemove }: Props) => {
   const visualActive = isSwitching ? !extension.isActive : extension.isActive;
 
   return (
-    <li className="bg-neutral-0 space-y-6 rounded-2xl border border-neutral-300 p-5 shadow-md">
+    <li className="bg-neutral-0 dark:text-neutral-0 space-y-6 rounded-2xl border border-neutral-300 p-5 shadow-md dark:border-neutral-700 dark:bg-neutral-800">
       <div className="flex items-start gap-4">
         <img src={extension.logo} alt={`${extension.name} logo`} />
 
@@ -61,7 +61,7 @@ export const ExtensionCard = ({ extension, onToggle, onRemove }: Props) => {
           onClick={() => handleClick(extension.name)}
         >
           <span className="sr-only">Active extension</span>
-          <span className="relative left-0 inline-block h-4 w-4 rounded-full bg-white leading-0 transition-all group-aria-checked:left-4"></span>
+          <span className="relative -top-[0.03125rem] left-0 inline-block h-4 w-4 rounded-full bg-white leading-0 transition-all group-aria-checked:left-4"></span>
         </button>
       </div>
     </li>
